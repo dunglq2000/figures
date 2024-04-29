@@ -1,0 +1,21 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\usetikzlibrary{matrix,positioning,shapes.arrows,fit}
+
+\begin{document}
+	\begin{tikzpicture}[
+		every node/.style = {
+			draw, rectangle, 
+			minimum width=0.75cm,
+			minimum height=0.5cm,
+			outer sep=0cm, inner sep=0cm,
+			node distance=0cm
+		}
+		]
+		\node (s5) {$(0, 1, 0, 1)$};
+		\node [below=0.5cm of s5](s10) {$(1, 0, 1, 0)$};
+		\draw[->] (s5.west) -- ++(-0.5,0) |- (s10.west);
+		\draw[->] (s10.east) -- ++(0.5, 0) |- (s5.east);
+	\end{tikzpicture}
+\end{document}

@@ -1,0 +1,21 @@
+\documentclass{standalone}
+
+\usepackage{tkz-euclide}
+
+\begin{document}
+	\begin{tikzpicture}
+		\tkzInit[xmin=-2,xmax=6,ymin=-4,ymax=4]
+		%\tkzDrawX[->,opacity=0.5]
+		%\tkzDrawY[->,opacity=0.5]
+		\tkzDefPoints{-1/1/V,2/2/V',0/0/A,3/1/A',-1/-2/B,2/-1/B',3/-2/C,6/-1/C'}
+		\tkzDrawSegment[->](V,V')
+		\tkzDrawSegments[->, opacity=0.75, dashed](A,A' B,B' C,C')
+		\tkzDrawSegments(A,B B,C C,A)
+		\tkzDrawSegments(A',B' B',C' C',A')
+		
+		\tkzLabelSegments[above](V,V'){$\vec{a}$}
+		\tkzLabelPoints[above](A,A')
+		\tkzLabelPoints[above left](B,B')
+		\tkzLabelPoints[below right](C,C')
+	\end{tikzpicture}
+\end{document}
