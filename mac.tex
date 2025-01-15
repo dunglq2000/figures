@@ -1,0 +1,36 @@
+\documentclass[tikz]{standalone}
+
+\usetikzlibrary{positioning,calc}
+\usepackage{fontspec}
+
+\begin{document}
+\begin{tikzpicture}
+    \node (sender) at (0, 0) [minimum width=3cm, minimum height=0.5cm] {Bên gửi};
+    \node (M1) [below=1cm of sender, minimum width=3cm, minimum height=0.5cm, align=center, draw] {Thông điệp \\ $M$};
+    \node (T1) [below=1cm of M1, minimum width=3cm, minimum height=0.5cm, align=center, draw] {$T = \mathsf{MAC}(M, K)$};
+    \node (K1) [below=1cm of T1, minimum width=3cm, minimum height=0.5cm, align=center, draw] {Khóa bí mật \\ $K$};
+
+    \draw[-latex] (M1.south) -- (T1.north);
+    \draw[-latex] (K1.north) -- (T1.south);
+
+    \node (receiver) at (8, 0) [minimum width=3cm, minimum height=0.5cm] {Bên nhận};
+    \node (M2) [below=1cm of receiver, minimum width=3cm, minimum height=0.5cm, align=center, draw] {Thông điệp \\ $M$};
+    \node (T2) [below=1cm of M2, minimum width=3cm, minimum height=0.5cm, align=center, draw] {$T$};
+    \node (K2) [below=1cm of T2, minimum width=3cm, minimum height=0.5cm, align=center, draw] {Khóa bí mật \\ $K$};
+
+    \draw[-latex] (M1) -- node [above] {kênh truyền mở} (M2);
+    \draw[-latex] (T1) -- node [above ]{kênh truyền mở} (T2);
+    \draw[-latex,dashed] (K1) -- node [above] {trao đổi khóa} (K2);
+
+    \node (T3) [right=1cm of T2, minimum width=3cm, minimum height=0.5cm, align=center, draw] {$T' = \mathsf{MAC}(M, K)$ \\ $T \equiv T'$?};
+    \node (accept) [below=2cm of T3] {Chấp nhận};
+    \node (refuse) [right=1cm of accept] {Bác bỏ};
+
+    \draw[-latex] (M2) -| (T3);
+    \draw[-latex] (T2) -- (T3);
+    \draw[-latex] (K2) |- (T3.south west);
+
+    \draw[-latex] (T3) -- node [left] {Đúng} (accept);
+    \draw[-latex] (T3.east) -| node [above] {Sai} (refuse.north);
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,50 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{fontspec}
+
+\usetikzlibrary{positioning,shapes.arrows,arrows.meta,calc}
+
+\tikzset{XOR/.style={draw,circle,append after command={
+        [shorten >=\pgflinewidth, shorten <=\pgflinewidth,]
+        (\tikzlastnode.north) edge (\tikzlastnode.south)
+        (\tikzlastnode.east) edge (\tikzlastnode.west)
+        }
+    }
+}
+
+\begin{document}
+\begin{tikzpicture}
+    \node [rectangle,draw] (L0) {$L_0$};
+    \node [rectangle,draw, right=2cm of L0] (R0) {$R_0$};
+    \node [circle,draw,below=1cm of R0] (F0) {$F$};
+    \node [rectangle,draw, right=2cm of F0] (K1) {$K_1$};
+    \node [XOR,below=1cm of F0] (X0) {};
+    \node [rectangle,draw,below=1cm of X0] (R1) {$R_1$};
+    \node [rectangle,draw,left=2cm of R1] (L1) {$L_1$};
+    \draw [>-Stealth] (R0.west) -- +(-0.5,0) -- (L1.north);
+    \draw [>-Stealth] (R0.south) -- (F0.north);
+    \draw [>-Stealth] (F0.south) -- (X0.north);
+    \draw [>-Stealth] (X0.south) -- (R1.north);
+    \draw [>-Stealth] (L0.east) -- +(0.5,0) -- ($(X0.west)+(-0.5,0)$) -- (X0.west);
+    \draw [>-Stealth] (K1.west) -- (F0.east);
+
+    \node [rectangle,below=1cm of L1] (li) {\dots};
+    \node [rectangle,below=1cm of R1] (ri) {\dots};
+
+    \node [rectangle,draw,below=1cm of li] (Li) {$L_{i-1}$};
+    \node [rectangle,draw, right=2cm of Li] (Ri) {$R_{i-1}$};
+    \node [circle,draw,below=1cm of Ri] (Fi) {$F$};
+    \node [rectangle,draw, right=2cm of Fi] (Ki1) {$K_{i}$};
+    \node [XOR,below=1cm of Fi] (Xi) {};
+    \node [rectangle,draw,below=1cm of Xi] (Ri1) {$R_{i}$};
+    \node [rectangle,draw,left=2cm of Ri1] (Li1) {$L_{i}$};
+    \draw [>-Stealth] (Ri.west) -- +(-0.5,0) -- (Li1.north);
+    \draw [>-Stealth] (Ri.south) -- (Fi.north);
+    \draw [>-Stealth] (Fi.south) -- (Xi.north);
+    \draw [>-Stealth] (Xi.south) -- (Ri1.north);
+    \draw [>-Stealth] (Li.east) -- ++(0.5,0) -- ($(Xi.west)+(-0.5,0)$) -- (Xi.west);
+    \draw [>-Stealth] (Ki1.west) -- (Fi.east);
+\end{tikzpicture}
+\end{document}
