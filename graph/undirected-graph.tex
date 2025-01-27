@@ -1,0 +1,13 @@
+\documentclass[tikz]{standalone}
+
+\usetikzlibrary{graphs,quotes}
+
+\begin{document}
+\begin{tikzpicture}
+    \graph [math nodes, nodes={circle, draw}, grow right=2cm] {
+        v_1 -- ["$e_{12}$"] v_2 -- { v_3 [> "$e_{23}$"] , v_4 [> "$e_{24}$"] };
+        v_5 -- ["$e_{56}$"] v_6; %-- ["$e_{64}$"] v_4;
+        v_2 -- ["$e_{26}$"] v_6;
+    };
+\end{tikzpicture}
+\end{document}

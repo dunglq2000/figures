@@ -1,0 +1,30 @@
+\documentclass[tikz]{standalone}
+
+\usetikzlibrary{shapes.arrows}
+
+\begin{document}
+\def\r{2}
+\begin{tikzpicture}[every node/.style={circle, draw}]
+    \node (v1) at (\r*1, 0) {$v_1$};
+    \node (v2) at (\r*0.50, \r*0.87) {$v_2$};
+    \node (v3) at (-\r*0.5, \r*0.87) {$v_3$};
+    \node (v4) at (-\r*1, 0) {$v_4$};
+    \node (v5) at (-\r*0.5, -\r*0.87) {$v_5$};
+    \node (v6) at (\r*0.5, -\r*0.87) {$v_6$};
+
+    \foreach \i in {2, 3, 4, 5, 6}
+        \draw (v1) -- (v\i);
+
+    \foreach \i in {3, 4, 5, 6}
+        \draw (v2) -- (v\i);
+    
+    \foreach \i in {4, 5, 6}
+        \draw (v3) -- (v\i);
+        
+    \foreach \i in {5, 6}
+        \draw (v4) -- (v\i);
+
+    \foreach \i in {6}
+        \draw (v5) -- (v\i);
+\end{tikzpicture}
+\end{document}
