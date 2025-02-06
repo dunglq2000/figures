@@ -1,0 +1,29 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tkz-euclide}
+
+\begin{document}
+\begin{tikzpicture}
+    \tkzDefPoint(0, 0){O}
+    \tkzDefPoint(0, 2){I}
+    \tkzDefPoint(0, 1){C}
+    \tkzDefPoint(4, 0){x1}
+    \tkzDefPoint(-1, 0){x2}
+    \tkzDefPoint(4/5, 8/5){A}
+
+    \tkzInterLL(I,A)(O,x1)\tkzGetPoint{B}
+    \tkzMarkAngle[size=0.4cm](A,C,I)
+    \tkzMarkRightAngle(I,O,B)
+    \tkzMarkRightAngle(I,A,O)
+    \tkzDrawPoints(O, I, A, B, C)
+    \tkzDrawSegments(I,B I,O O,A)
+    \tkzDrawSegment[dashed](C,A)
+    \tkzDrawLines(x1,x2)
+    \tkzDrawCircle(C, A)
+    \tkzLabelPoint[above right](A){$A$}
+    \tkzLabelPoint[above](I){$I$}
+    \tkzLabelPoints[below](O, B)
+
+    \tkzLabelSegment[left](I,C){$1$}
+\end{tikzpicture}
+\end{document}
