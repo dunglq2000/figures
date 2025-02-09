@@ -1,0 +1,46 @@
+\documentclass{standalone}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=0, xmax=4,
+    ymin=0, ymax=10,
+    domain=0:4,
+    samples=100,
+    xtick={1,2,3},
+    ytick={1,4,9},
+    clip=false
+]
+
+% Plot the parabola y = x^2
+\addplot [thick, black] {x^2};
+
+% Define points A(1,1), B(3,9), and C(2,4)
+\addplot [only marks, mark=*] coordinates {(1,1) (3,9) (2,4) (1,9)};
+
+% Label the points
+\node [above left] at (axis cs:1,1) {$A$};
+\node [above left] at (axis cs:3,9) {$B$};
+\node [right] at (axis cs:2,4) {$C$};
+
+% Draw the secant line AB: y = 4x - 3
+\addplot [thick, red, domain=1:3] {4*x - 3};
+\draw [dashed] (1,1) -- (1,9);
+\draw [dashed] (1,9) -- (3,9);
+\node [red, rotate=90, above] at (axis cs:1,5) {$f(b) - f(a)$};
+\node [red, above] at (axis cs:2,9) {$b - a$};
+
+% Draw the tangent line at C: y = 4x - 4 (plotted around point C)
+\addplot [thick, blue, domain=1:4] {4*x - 4};
+\node [blue, below right] at (axis cs:2.5,6) {Tiếp tuyến tại $C$};
+
+\node at (axis cs:2,14) {$A = (a, f(a))$, $B = (b, f(b))$};
+
+\end{axis}
+\end{tikzpicture}
+\end{document}
