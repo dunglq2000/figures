@@ -1,0 +1,118 @@
+\documentclass{standalone}
+
+\input ./avanzi-tikz-defs.tex
+
+\RequirePackage{fullpage}
+
+\begin{document}
+\begin{tikzpicture}
+
+  \newcount\q
+  \newcount\t
+  \newcount\s
+  \newcount\u
+
+  %% Define all nodes for the eight s-boxes, 6 above (inputs) and 4 below (outputs)
+  %% and also three further layers above the inputs, the topmost of which has only
+  %% 4 of the six bits.
+
+  \foreach \i in {0,...,7} {
+    \u=\i 
+    \advance\u by 1
+    \def\j{\number\u}
+
+    \node[rectangle, draw=black, thick, minimum width=10.4mm,  minimum height=8mm, xshift=\i*12mm] (S\j) {$S_{\j}$}; 
+
+    \foreach \m in {0,...,5}  {
+      \node[bit,yshift=0.2mm,right=2*\m mm of S\j.north west] (S\j in\m) {};
+      \node[bit,above=24mm of S\j in\m] (S\j inmid\m) {};
+      \node[bit,above=4mm of S\j in\m] (S\j inclose\m) {};
+    }
+
+    \foreach \m in {1,...,4}  {
+      \node[bit,yshift=-0.2mm,right=2*\m mm of S\j.south west] (S\j out\m) {};
+      \node[bit,below=4mm of S\j out\m] (S\j outext\m) {};
+      \node[bit,above=9mm of S\j inmid\m] (S\j inext\m) {};
+    }
+  }
+
+  %% the crossed connectnections
+
+  \foreach \i in {1,...,7} {
+    \u=\i 
+    \advance\u by 1
+    \def\j{\number\u}
+
+    \draw[-,very thin] (S\j inext1) -- (S\i inmid5);
+    \draw[cross line,-,very thin] (S\i inext4) -- (S\j inmid0);
+  }
+
+  %% the vertical connectnections
+
+  \foreach \i in {0,...,7} {
+    \u=\i 
+    \advance\u by 1
+    \def\j{\number\u}
+
+    \foreach \m in {0,...,5}  {
+      \draw[-,very thin] (S\j inclose\m) -- (S\j in\m);
+      \draw[-,densely dotted,thin,color={black!40!white}] (S\j inclose\m) -- (S\j inmid\m);
+    }
+
+    \foreach \m in {1,...,4}  {
+      \draw[-,very thin] (S\j inmid\m) -- (S\j inext\m);
+      \draw[-,very thin] (S\j out\m) -- (S\j outext\m);
+    }
+  }
+
+  %% connectnecting the ends
+
+  \node[coordinate,right=2mm of S8inmid5] (afterS8) {};
+  \node[coordinate,right=4mm of S8inmid5] (afterS8b) {};
+  \node[coordinate,left=2mm of S1inmid0] (beforeS1) {};
+  \node[coordinate,left=4mm of S1inmid0] (beforeS1b) {};
+
+  \draw[cross line,-,very thin] (S1inext1.south west) to[out=200, in=120] (beforeS1b) to[out=300,in=270,distance=8mm] (afterS8) to[out=90,in=90,distance=1.8mm] (S8inmid5.north);
+  \draw[cross line,-,very thin] (S8inext4.south east) to[out=330, in=60] (afterS8b) to[out=240,in=270,distance=11mm] (beforeS1) to[out=90,in=90,distance=1.8mm] (S1inmid0.north);
+
+  %% the "crossbars" collecting or spreading all bits in order
+
+  \draw[-,thin] (S1inext1.north) -- node[above, near start] {\tiny $\mathsf{Expand}$ từ 32 bits lên 48 bits} (S8inext4.north);
+  \draw[-,thin] (S1inmid0.south) -- (S8inmid5.south);
+  \draw[-,thin] (S1inclose0.north) -- (S8inclose5.north);
+  \draw[-,thin] (S1outext1.south) --
+     node[below, near start] {\tiny Nén 48 bits xuống 32 bits}
+     node[below, near end] {\tiny Mỗi S-Box biến đổi 6 bits thành 4 bits} 
+       (S8outext4.south);
+
+  %% define entry and exit points for the expansion and sbox layers
+
+  \node[coordinate] (entryEXP) at ($ (S4inext4.north) !.5! (S5inext1.north) $) {};
+  \node[coordinate] (exitEXP) at ($ (S4inmid4.south) !.5! (S5inmid1.south) $) {};
+  \node[coordinate] (entrySBOX) at ($ (S4inclose4.north) !.5! (S5inclose1.north) $) {};
+  \node[coordinate] (exitSBOX) at ($ (S4outext4.south) !.5! (S5outext1.south) $) {};
+  
+  %% add the round key
+  
+  \node[XOR,cross line] (XORK) at ($ (exitEXP) !.7! (entrySBOX) $) {};
+  \node[right=58mm of XORK] (key) {$K_i$};
+
+  %% input
+
+  \node[above=8mm of entryEXP] (input) {$R_{i}$};
+  \draw[arrow] (input) -- node[right] {\tiny 32 bits}  (entryEXP);
+
+  %% output
+
+  \node[function,below=8mm of exitSBOX] (P) {P};
+  \node[below=8mm of P] (exitALL) {XOR với $L_i$};
+  
+  \draw[arrow,cross line] (exitEXP) -- (XORK);
+  \draw[arrow] (XORK) -- (entrySBOX);
+  \draw[arrow] (exitSBOX) -- (P);
+  \draw[arrow] (P) -- node[right] {\tiny 32 bits}  (exitALL);
+
+  \draw[arrow,cross line] (key) -- node[above, very near start] {\tiny ~~~48 bits} (XORK);
+
+\end{tikzpicture}
+\end{document}
