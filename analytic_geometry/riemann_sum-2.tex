@@ -1,0 +1,25 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz,tkz-euclide}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=newest}
+\usepgfplotslibrary{fillbetween}
+
+\begin{document}	
+\foreach \n in {8}{
+	\begin{tikzpicture}[remember picture]
+		\pgfmathsetmacro{\a}{-2}
+		\pgfmathsetmacro{\b}{2}
+		\draw[->] (-4,0) -- (4,0) node[right] {$x$};
+		\draw[->] (0,0) -- (0,5) node[above] {$y$};
+		\foreach \i in {1,2,...,\n}{
+			\pgfmathsetmacro\xi{\a+((\b-\a)*\i/\n)}
+			\pgfmathsetmacro\xj{\a+((\b-\a)*(\i-1)/\n)}
+			\pgfmathsetmacro\fx{-\xi*\xi+4}
+			\draw [fill=gray,opacity=0.5] (\xj,0) rectangle (\xi,\fx);
+		}
+		\draw [domain=-2:2, smooth] plot ({\x}, {-\x*\x+4});
+	\end{tikzpicture}
+}
+\end{document}

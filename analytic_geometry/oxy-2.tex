@@ -1,0 +1,15 @@
+\documentclass[tikz,border=1pt]{standalone}
+
+\usepackage{tkz-euclide}
+\begin{document}
+	\begin{tikzpicture}
+		\tkzDefPoints{0/3/A,0/0/H,1/0/I,-1/0/h,3/0/i}
+		\tkzDrawPoints(A,H,I)
+		\tkzLabelPoints[above](A)
+		\tkzLabelPoints(H,I)
+		\tkzDrawLine(h,i)
+		\tkzDrawSegments(A,H A,I)
+		\tkzMarkRightAngle(A,H,I)
+		\tkzLabelLine[above right](I,i){$(d)$}
+	\end{tikzpicture}
+\end{document}

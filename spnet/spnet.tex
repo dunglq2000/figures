@@ -1,0 +1,187 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{fontspec}
+
+\usetikzlibrary{positioning,shapes.arrows,arrows.meta,calc}
+\usetikzlibrary{crypto.symbols}
+\usetikzlibrary{shapes}
+
+\tikzset{XOR/.style={draw,circle,append after command={
+        [shorten >=\pgflinewidth, shorten <=\pgflinewidth,]
+        (\tikzlastnode.north) edge (\tikzlastnode.south)
+        (\tikzlastnode.east) edge (\tikzlastnode.west)
+        }
+    }
+}
+
+\begin{document}
+\begin{tikzpicture}
+    \node [rectangle,minimum width=2cm,draw] (P) {$P$};
+    \node [XOR,below=1em of P] (X0) {};
+    \node [rectangle,minimum width=1cm,draw,right=2cm of X0] (K0) {$K_0$};
+
+    \draw [>-Stealth] (P) -- (X0);
+    \draw [>-Stealth] (K0) -- (X0);
+
+    \foreach \z [evaluate=\z as \zz using {div(\z,4)}] in {0,...,15} {
+        \node (t\z) at ($(X0.south)+(-5.6em,-2em)+\z*(0.75em, 0)$) {};
+    }
+
+    %% XOR to SBOXes
+    \node (tm) at ($(X0.south)+(0,-1em)$) {};
+    \foreach \z in {0,...,15} {
+        \draw (tm.center) -| (t\z.center);
+    }
+    \draw [>-Stealth] (X0.south) -- (tm.center);
+    %%
+
+    %% SBoxes
+    \foreach \z in {0,...,3} {
+        \node[draw,minimum width=2.75em,minimum height=2em,fill=white] (S_\z) at ($(X0.south)+\z*(3em,0) + (-5.6em+1.1em,-3em)$) {$S_\z$};
+        %\node[draw,thick,minimum width=2.75em,minimum height=2em,fill=white] (p4) at ($\z*(3em,0) + (1.1em,-11em)$) {$S$};
+    }
+
+    \foreach \z [evaluate=\z as \zz using {div(\z,4)}] in {0,...,15} {
+        \node (x\z) at ($(X0.south)+(-5.6em,-4em)+\z*(0.75em, 0)$) {};
+        \node (y\z) at ($(X0.south)+(-5.6em,-4em)+\z*(0.75em, 0)+(0,-4em)$) {};
+        
+        \node (xx\z) [below = 0.5em of x\z] {};
+        \node (yy\z) [above = 0.5em of y\z] {};
+    }
+
+    \draw (x0.center) -- (xx0.center)  -- (yy0.center) -- (y0.center);
+    \draw (x1.center) -- (xx1.center)  -- (yy4.center) -- (y4.center);
+	\draw (x2.center) -- (xx2.center)  -- (yy8.center) -- (y8.center);
+	\draw (x3.center) -- (xx3.center)  -- (yy12.center) -- (y12.center);
+	\draw (x4.center) -- (xx4.center)  -- (yy1.center) -- (y1.center);
+	\draw (x5.center) -- (xx5.center)  -- (yy5.center) -- (y5.center);
+	\draw (x6.center) -- (xx6.center)  -- (yy9.center) -- (y9.center);
+	\draw (x7.center) -- (xx7.center)  -- (yy13.center) -- (y13.center);
+    \draw (x8.center) -- (xx8.center)  -- (yy2.center) -- (y2.center);
+    \draw (x9.center) -- (xx9.center)  -- (yy6.center) -- (y6.center);
+    \draw (x10.center) -- (xx10.center)  -- (yy10.center) -- (y10.center);
+    \draw (x11.center) -- (xx11.center)  -- (yy14.center) -- (y14.center);
+    \draw (x12.center) -- (xx12.center)  -- (yy3.center) -- (y3.center);
+    \draw (x13.center) -- (xx13.center)  -- (yy7.center) -- (y7.center);
+    \draw (x14.center) -- (xx14.center)  -- (yy11.center) -- (y11.center);
+    \draw (x15.center) -- (xx15.center)  -- (yy15.center) -- (y15.center);
+
+    \node [XOR,below=9em of X0] (X1) {};
+    \node [rectangle,minimum width=1cm,draw,right=2cm of X1] (K1) {$K_1$};
+
+    \foreach \z [evaluate=\z as \zz using {div(\z,4)}] in {0,...,15} {
+        \node (t1\z) at ($(X0.south)+(-5.6em,-8em)+\z*(0.75em, 0)$) {};
+    }
+
+    %% XOR to SBOXes
+    \node (tm1) at ($(X0.south)+(0,-8em)$) {};
+    \foreach \z in {0,...,15} {
+        \draw (tm1.center) -| (t1\z.center);
+    }
+
+    \draw [>-Stealth] (tm1.center) -- (X1);
+    \draw [>-Stealth] (K1) -- (X1);
+
+    \foreach \z [evaluate=\z as \zz using {div(\z,4)}] in {0,...,15} {
+        \node (b1\z) at ($(X1.south)+(-5.6em,-2em)+\z*(0.75em, 0)$) {};
+    }
+
+    %% XOR to SBOXes
+    \node (bm1) at ($(X1.south)+(0,-1em)$) {};
+    \foreach \z in {0,...,15} {
+        \draw (bm1.center) -| (b1\z.center);
+    }
+    \draw [>-Stealth] (X1.south) -- (bm1.center);
+    %%
+
+    %% SBoxes
+    \foreach \z in {0,...,3} {
+        \node[draw,minimum width=2.75em,minimum height=2em,fill=white] (S1_\z) at ($(X1.south)+\z*(3em,0) + (-5.6em+1.1em,-3em)$) {$S_\z$};
+        %\node[draw,thick,minimum width=2.75em,minimum height=2em,fill=white] (p4) at ($\z*(3em,0) + (1.1em,-11em)$) {$S$};
+    }
+
+    \foreach \z [evaluate=\z as \zz using {div(\z,4)}] in {0,...,15} {
+        \node (x\z_1) at ($(X1.south)+(-5.6em,-4em)+\z*(0.75em, 0)$) {};
+        \node (y\z_1) at ($(X1.south)+(-5.6em,-4em)+\z*(0.75em, 0)+(0,-4em)$) {};
+        
+        \node (xx\z_1) [below = 0.5em of x\z_1] {};
+        \node (yy\z_1) [above = 0.5em of y\z_1] {};
+    }
+
+    \draw (x0_1.center) -- (xx0_1.center)  -- (yy0_1.center) -- (y0_1.center);
+    \draw (x1_1.center) -- (xx1_1.center)  -- (yy4_1.center) -- (y4_1.center);
+	\draw (x2_1.center) -- (xx2_1.center)  -- (yy8_1.center) -- (y8_1.center);
+	\draw (x3_1.center) -- (xx3_1.center)  -- (yy12_1.center) -- (y12_1.center);
+	\draw (x4_1.center) -- (xx4_1.center)  -- (yy1_1.center) -- (y1_1.center);
+	\draw (x5_1.center) -- (xx5_1.center)  -- (yy5_1.center) -- (y5_1.center);
+	\draw (x6_1.center) -- (xx6_1.center)  -- (yy9_1.center) -- (y9_1.center);
+	\draw (x7_1.center) -- (xx7_1.center)  -- (yy13_1.center) -- (y13_1.center);
+    \draw (x8_1.center) -- (xx8_1.center)  -- (yy2_1.center) -- (y2_1.center);
+    \draw (x9_1.center) -- (xx9_1.center)  -- (yy6_1.center) -- (y6_1.center);
+    \draw (x10_1.center) -- (xx10_1.center)  -- (yy10_1.center) -- (y10_1.center);
+    \draw (x11_1.center) -- (xx11_1.center)  -- (yy14_1.center) -- (y14_1.center);
+    \draw (x12_1.center) -- (xx12_1.center)  -- (yy3_1.center) -- (y3_1.center);
+    \draw (x13_1.center) -- (xx13_1.center)  -- (yy7_1.center) -- (y7_1.center);
+    \draw (x14_1.center) -- (xx14_1.center)  -- (yy11_1.center) -- (y11_1.center);
+    \draw (x15_1.center) -- (xx15_1.center)  -- (yy15_1.center) -- (y15_1.center);
+
+    \node [XOR,below=9em of X1] (X2) {};
+    \node [rectangle,minimum width=1cm,draw,right=2cm of X2] (K2) {$K_2$};
+
+    \foreach \z [evaluate=\z as \zz using {div(\z,4)}] in {0,...,15} {
+        \node (t2\z) at ($(X1.south)+(-5.6em,-8em)+\z*(0.75em, 0)$) {};
+    }
+
+    %% XOR to SBOXes
+    \node (tm2) at ($(X1.south)+(0,-8em)$) {};
+    \foreach \z in {0,...,15} {
+        \draw (tm2.center) -| (t2\z.center);
+    }
+
+    \draw [>-Stealth] (tm2.center) -- (X2);
+    \draw [>-Stealth] (K2) -- (X2);
+
+    \node [rectangle,minimum width=2cm,draw,below=0.5cm of X2] (C) {$C$};
+
+    \draw [>-Stealth] (X2) -- (C);
+    
+\end{tikzpicture}
+
+\begin{tikzpicture}
+    %% Subkey XORs
+    \foreach \z in {0,...,15} {
+        \node[XOR, scale=0.8] (xor\z) at ($\z*(0.75em, 0)$) {};
+        \node[XOR, scale=0.8] (xorr\z) at ($\z*(0.75em, 0)+(0,-9em)$) {};
+    }
+
+    %% Nodes positions
+    \foreach \z in {0,...,15} {
+        \node (i\z) [above = 0.75em of xor\z] {};
+        \node (o\z) [below = 2.5em of xor\z] {};
+        \node (ii\z) [above = 0.25em of xorr\z] {};
+        \node (oo\z) [below = 3em of xorr\z] {};
+        \node (t\z) [below = 4em of oo\z] {};
+        \draw[thick] (i\z) -- (xor\z);
+    }
+
+    %% Permutation layer
+    \foreach \z [evaluate=\z as \zz using {int(mod(11*\z,15))}] in {0,...,14} {
+        \draw[thick] (xor\z)  -- (o\z.center)  -- (ii\zz.center) -- (xorr\zz) -- (oo\zz);
+        \draw[thick] (oo\z.north)  -- (t\zz.south) -- +(0,-0.5em);
+    }
+    \draw[thick] (xor15) -- (o15.center) -- (ii15.center) -- (xorr15) -- (oo15);
+    \draw[thick] (oo15.north) -- (t15.south) -- +(0,-0.5em);    
+
+    %% SBoxes
+    \foreach \z in {0,...,3} {
+        \node[draw,thick,minimum width=2.75em,minimum height=2em,fill=white] (p4) at ($\z*(3em,0) + (1.1em,-2em)$) {$S$};
+        \node[draw,thick,minimum width=2.75em,minimum height=2em,fill=white] (p4) at ($\z*(3em,0) + (1.1em,-11em)$) {$S$};
+    }
+
+    \node[left = 0em of xor0] {$k_{1}$};
+    \node[left = 0em of xorr0] {$k_{2}$};
+
+\end{tikzpicture}
+\end{document}
