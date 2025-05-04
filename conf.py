@@ -25,7 +25,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_logo = "Euler_Stamp.jpg"
-html_title = "Math Book"
+html_title = "TikZ for mathematicians and cryptographers"
 
 html_theme = 'furo'
 html_static_path = ['_static']

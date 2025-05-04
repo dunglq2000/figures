@@ -3,15 +3,24 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-TikZ for mathematician and cryptographers documentation
-=======================================================
+=========================================
+TikZ for mathematician and cryptographers
+=========================================
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
+Lấy cảm hứng từ project *TikZ for Cryptographers* :cite:`TikZ:for:Cryptographers`, 
+mình quyết định xây dựng project này cho quyển notebook https://dunglq2000.github.io/mathematics/,
+cũng như các tài liệu khác trong tương lai.
 
+=========
+Nội dung
+=========
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+
+==================
+Tài liệu tham khảo
+==================
+
+.. bibliography:: 
+   :style: unsrt   
 
