@@ -1,0 +1,14 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{polynom}
+
+\begin{document}
+\foreach \i in {1,...,10}
+{
+\begin{tikzpicture}
+    \node {
+        \polylongdiv[vars=x,stage=\i]{x^3 + 4 x^2 - 3}{x - 2}
+    };
+\end{tikzpicture}
+}
+\end{document}

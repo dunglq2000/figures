@@ -1,6 +1,6 @@
 # figures
 
-Các hình vẽ cho quyển sách [https://dunglq2000.github.io/mathematics/](https://dunglq2000.github.io/mathematics/) cũng như các tài liệu khác do mình viết trong tương lai.
+Các hình vẽ cho quyển sách [https://dunglq2000.github.io/](https://dunglq2000.github.io/) cũng như các tài liệu khác do mình viết trong tương lai.
 
 Các hình vẽ sử dụng TikZ, được vẽ bởi mình hoặc tham khảo từ các nguồn chính sau.
 

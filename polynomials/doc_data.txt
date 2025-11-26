@@ -1,0 +1,68 @@
+InfoBegin
+InfoKey: Creator
+InfoValue: TeX
+InfoBegin
+InfoKey: ModDate
+InfoValue: D:20251116174104+03&apos;00&apos;
+InfoBegin
+InfoKey: CreationDate
+InfoValue: D:20251116174104+03&apos;00&apos;
+InfoBegin
+InfoKey: Producer
+InfoValue: pdfTeX-1.40.26
+InfoBegin
+InfoKey: PTEX.Fullbanner
+InfoValue: This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) kpathsea version 6.4.0
+PdfID0: 5ce71a2a2f884f2b01f7d3e353bcdc74
+PdfID1: 5ce71a2a2f884f2b01f7d3e353bcdc74
+NumberOfPages: 10
+PageMediaBegin
+PageMediaNumber: 1
+PageMediaRotation: 0
+PageMediaRect: 0 0 150.296 33.64
+PageMediaDimensions: 150.296 33.64
+PageMediaBegin
+PageMediaNumber: 2
+PageMediaRotation: 0
+PageMediaRect: 0 0 150.296 33.64
+PageMediaDimensions: 150.296 33.64
+PageMediaBegin
+PageMediaNumber: 3
+PageMediaRotation: 0
+PageMediaRect: 0 0 150.296 48.584
+PageMediaDimensions: 150.296 48.584
+PageMediaBegin
+PageMediaNumber: 4
+PageMediaRotation: 0
+PageMediaRect: 0 0 150.296 60.539
+PageMediaDimensions: 150.296 60.539
+PageMediaBegin
+PageMediaNumber: 5
+PageMediaRotation: 0
+PageMediaRect: 0 0 150.296 60.539
+PageMediaDimensions: 150.296 60.539
+PageMediaBegin
+PageMediaNumber: 6
+PageMediaRotation: 0
+PageMediaRect: 0 0 150.296 75.483
+PageMediaDimensions: 150.296 75.483
+PageMediaBegin
+PageMediaNumber: 7
+PageMediaRotation: 0
+PageMediaRect: 0 0 150.296 87.438
+PageMediaDimensions: 150.296 87.438
+PageMediaBegin
+PageMediaNumber: 8
+PageMediaRotation: 0
+PageMediaRect: 0 0 150.296 87.438
+PageMediaDimensions: 150.296 87.438
+PageMediaBegin
+PageMediaNumber: 9
+PageMediaRotation: 0
+PageMediaRect: 0 0 150.296 102.382
+PageMediaDimensions: 150.296 102.382
+PageMediaBegin
+PageMediaNumber: 10
+PageMediaRotation: 0
+PageMediaRect: 0 0 150.296 114.337
+PageMediaDimensions: 150.296 114.337
